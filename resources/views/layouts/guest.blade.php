@@ -32,7 +32,8 @@
 <body class="font-sans text-gray-900 antialiased">
     <div class="min-h-screen authentication-bg flex flex-col justify-center relative">
         <div class="flex items-center justify-center mb-10">
-            <img src="{{ Vite::asset('resources/images/logo-icl.webp') }}" width="250" alt="logo" />
+            <h1><b>Rido Flowers</b></h1>
+            {{-- <img src="{{ Vite::asset('resources/images/logo-icl.webp') }}" width="250" alt="logo" /> --}}
         </div>
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             {{ $slot }}
