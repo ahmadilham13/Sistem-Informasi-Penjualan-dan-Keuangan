@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Laporan\LaporanController;
 use App\Http\Controllers\Petugas\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Transaksi\TransaksiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,12 +39,14 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
     Route::prefix('petugas/')->name('petugas.')->controller(UserController::class)->group(function () {
         Route::get('', 'index')->name('index');
     });
-});
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+    Route::prefix('transaksi/')->name('transaksi.')->controller(TransaksiController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+    });
+
+    Route::prefix('laporan/')->name('laporan.')->controller(LaporanController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+    });
+});
 
 require __DIR__.'/auth.php';

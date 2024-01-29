@@ -42,12 +42,12 @@
                     </label>
                 </div>
                 {{-- Forgot Password --}}
-                @if (Route::has('password.request'))
+                {{-- @if (Route::has('password.request'))
                     <a class="text-sm text-blue-500 rounded-md hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         href="{{ route(name: 'password.request', absolute: false) }}">
                         {{ __('Forgot password?') }}
                     </a>
-                @endif
+                @endif --}}
             </div>
 
             <div class="mt-4">
