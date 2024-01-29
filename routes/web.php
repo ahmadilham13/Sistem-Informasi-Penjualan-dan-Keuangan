@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Petugas\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,10 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
         Route::get('', 'edit')->name('edit');
         Route::put('avatar', 'changeAvatar')->name('avatar');
         Route::patch('', 'update')->name('update');
+    });
+
+    Route::prefix('petugas/')->name('petugas.')->controller(UserController::class)->group(function () {
+        Route::get('', 'index')->name('index');
     });
 });
 
