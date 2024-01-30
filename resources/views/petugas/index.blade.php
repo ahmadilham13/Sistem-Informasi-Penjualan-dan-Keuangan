@@ -53,7 +53,7 @@
                             <x-table-row>
                                 <x-table-data>{{ $item->name }}</x-table-data>
                                 <x-table-data>{{ $item->email }}</x-table-data>
-                                <x-table-data>last seen</x-table-data>
+                                <x-table-data>{{ !empty($item->last_seen) ? $item->last_seen : '-' }}</x-table-data>
                                 <x-table-data>{{ $item->created_at }}</x-table-data>
                                 <x-table-actions>
                                     <div class="flex items-center justify-center gap-2">
