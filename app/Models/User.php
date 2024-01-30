@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role_user_id',
+        'email_verified_at',
     ];
 
     // protected $with = ['media'];

@@ -1,5 +1,7 @@
 <x-app-layout>
-
+    {{-- start::Alert --}}
+    @include('petugas.partials.alert')
+    {{-- end::Alert --}}
     <div>
         <!-- Page Header -->
         <div class="flex items-center justify-between mb-8">
@@ -18,7 +20,7 @@
                     <div class="flex items-center justify-between gap-3">
                         <h4 class="text-base font-semibold">Petugas</h4>
                         {{-- tambah can --}}
-                        <a href="#" class="px-4 py-2 text-sm text-indigo-500 transition duration-150 rounded bg-indigo-50 hover:bg-indigo-500 hover:text-white">
+                        <a href="{{ route(name: 'petugas.create', absolute: false) }}" class="px-4 py-2 text-sm text-indigo-500 transition duration-150 rounded bg-indigo-50 hover:bg-indigo-500 hover:text-white">
                             New Petugas
                         </a>
                         {{-- tambah encan --}}
@@ -57,7 +59,7 @@
                                 <x-table-data>{{ $item->created_at }}</x-table-data>
                                 <x-table-actions>
                                     <div class="flex items-center justify-center gap-2">
-                                        <a href="#" class="px-4 py-2 text-xs font-medium text-yellow-500 transition duration-150 rounded bg-yellow-50 hover:bg-yellow-500 hover:text-white">
+                                        <a href="{{ route(name: 'petugas.edit', parameters: ['user' => $item->id], absolute: false) }}" class="px-4 py-2 text-xs font-medium text-yellow-500 transition duration-150 rounded bg-yellow-50 hover:bg-yellow-500 hover:text-white">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
                                                 <path
                                                     d="M6.41421 15.89L16.5563 5.74785L15.1421 4.33363L5 14.4758V15.89H6.41421ZM7.24264 17.89H3V13.6473L14.435 2.21231C14.8256 1.82179 15.4587 1.82179 15.8492 2.21231L18.6777 5.04074C19.0682 5.43126 19.0682 6.06443 18.6777 6.45495L7.24264 17.89ZM3 19.89H21V21.89H3V19.89Z"

@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'superadmin@admin.com',
             'role_user_id'  => 1,
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password' => Hash::make('superadmin789'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
             'name' => 'User Petugas',
             'email' => 'userpetugas@petugas.com',
             'role_user_id'  => 2,
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password' => Hash::make('userpetugas789'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);

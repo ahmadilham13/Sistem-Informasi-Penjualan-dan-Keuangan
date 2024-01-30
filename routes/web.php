@@ -5,6 +5,7 @@ use App\Http\Controllers\Laporan\LaporanController;
 use App\Http\Controllers\Petugas\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Transaksi\TransaksiController;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,14 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
 
     Route::prefix('petugas/')->name('petugas.')->controller(UserController::class)->group(function () {
         Route::get('', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class);
+
+        Route::prefix('{user}/')->group(function () {
+            Route::get('', 'show')->name('show');
+            Route::get('edit', 'edit')->name('edit');
+            Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class);
+        });
     });
 
     Route::prefix('transaksi/')->name('transaksi.')->controller(TransaksiController::class)->group(function () {
