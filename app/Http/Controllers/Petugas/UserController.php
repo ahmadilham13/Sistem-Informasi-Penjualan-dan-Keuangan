@@ -3,11 +3,25 @@
 namespace App\Http\Controllers\Petugas;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\UserInterface;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UserController extends BaseController
 {
+    
+    public function __construct(UserInterface $user)
+    {
+        parent::__construct($user);
+
+        $this->setSortChoices([
+            'created_at-asc' => 'Oldest',
+            'created_at-desc' => 'Newest',
+            'name-desc' => 'Z-A',
+            'name-asc' => 'A-Z',
+        ]);
+    }
+    
     /**
      * Display a listing of the resource.
      */

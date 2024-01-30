@@ -15,9 +15,9 @@ class UserRepository implements UserInterface
     {
         return User::query()
             ->when(!empty($search), fn(Builder $query) => $query->where(DB::raw('lower(name)'), 'like', '%' . strtolower($search) . '%'))
-            ->with('roleUser')
             ->when(! empty($sortBy) && ! empty($sortDirection), fn (Builder $query) => $query->orderBy($sortBy, $sortDirection))
             ->when(empty($sortBy) && empty($sortDirection), fn (Builder $query) => $query->oldest())
+            ->with('roleUser')
             ->paginate(perPage: $perPage, page: $currentPage);
     }
 }
