@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Bibit\ProductController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Laporan\LaporanController;
 use App\Http\Controllers\Petugas\UserController;
@@ -43,6 +44,19 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
         Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class);
 
         Route::prefix('{user}/')->group(function () {
+            Route::get('', 'show')->name('show');
+            Route::get('edit', 'edit')->name('edit');
+            Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class);
+            Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class);
+        });
+    });
+
+    Route::prefix('product/')->name('product.')->controller(ProductController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class);
+
+        Route::prefix('{product}/')->group(function () {
             Route::get('', 'show')->name('show');
             Route::get('edit', 'edit')->name('edit');
             Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class);

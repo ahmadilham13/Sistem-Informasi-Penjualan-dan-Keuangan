@@ -7,14 +7,6 @@
     <x-alert type="success" :show="true">
         <span class="font-medium">{{ __('User has been Updated successfully!') }}</span>
     </x-alert>
-    @elseif (session('status') === 'user-deactivated')
-    <x-alert type="success" :show="true">
-        <span class="font-medium">{{ __('User has been Deactivated successfully!') }}</span>
-    </x-alert>
-@elseif (session('status') === 'user-activated')
-    <x-alert type="success" :show="true">
-        <span class="font-medium">{{ __('User has been Activated successfully!') }}</span>
-    </x-alert>
 @elseif (session('status') === 'user-deleted')
     <x-alert type="success" :show="true">
         <span class="font-medium">{{ __('User has been Deleted successfully!') }}</span>
