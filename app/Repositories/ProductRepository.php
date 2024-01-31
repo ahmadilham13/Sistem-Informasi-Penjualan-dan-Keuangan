@@ -27,10 +27,10 @@ class ProductRepository implements ProductInterface
 
         $product = DB::transaction(function () use($data, $request) {
             $product = ProductBibit::query()->create($data);
-            // if($request->hasFile('avatar')) {
-            //     $product->addMediaFromRequest('avatar')
-            //         ->toMediaCollection();
-            // }
+            if($request->hasFile('product_image')) {
+                $product->addMediaFromRequest('product_image')
+                    ->toMediaCollection();
+            }
             return $product;
         });
 
@@ -46,11 +46,11 @@ class ProductRepository implements ProductInterface
         $data = $request->validated();
         $product = DB::transaction(function () use ($product, $data, $request) {
             $product->update($data);
-            // if($request->hasFile('avatar')) {
-            //     $product->media()->delete();
-            //     $product->addMediaFromRequest('avatar')
-            //         ->toMediaCollection();
-            // }
+            if($request->hasFile('product_image')) {
+                $product->media()->delete();
+                $product->addMediaFromRequest('product_image')
+                    ->toMediaCollection();
+            }
             return $product;
         });
 
