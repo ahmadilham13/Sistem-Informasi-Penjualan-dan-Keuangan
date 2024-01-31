@@ -1,7 +1,8 @@
 <?php
 
 return [
-
+    'user_online' => env('USER_ONLINE', 'user-is-online'),
+    'user_online_expired'   => env('LAST_SEEN_EXP', 15),
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults

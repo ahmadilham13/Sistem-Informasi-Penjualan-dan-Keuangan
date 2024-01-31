@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 
 class UserRepository implements UserInterface
@@ -22,6 +23,17 @@ class UserRepository implements UserInterface
             ->when(empty($sortBy) && empty($sortDirection), fn (Builder $query) => $query->oldest())
             ->with('roleUser')
             ->paginate(perPage: $perPage, page: $currentPage);
+    }
+
+    public function GetOnlineUsers() : AnonymousResourceCollection
+    {
+        $timeExp = Carbon::now()->subMinutes(config('auth.user_online_expired'));
+
+        $collection = User::query()
+            ->where('last_seen', '>=', $timeExp)
+            ->with('media')
+            ->get();
+        return UserResource::collection($collection);
     }
 
     public function CreateUser(UserRequest $request): UserResource

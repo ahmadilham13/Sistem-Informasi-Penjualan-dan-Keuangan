@@ -27,26 +27,25 @@
                 <div class="px-4 py-6 overflow-y-hidden bg-white rounded-lg shadow-xl h-fit">
                     <h4 class="mb-2 text-lg font-semibold">Recently Online</h4>
                     <hr>
-                    {{-- Start Looping --}}
-                    <div class="mt-2">
-                        <div class="flex items-center justify-between px-3 py-2 text-sm">
-                            <div class="flex items-center gap-3">
-                                <div class="relative">
-                                    <img class="object-cover w-10 h-10 rounded-full"
-                                        src="{{ Vite::asset('resources/images/default-avatar.png') }}"
-                                        alt="User 1">
-                                    <span
-                                        class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                    @foreach ($onlineUsers as $onlineUser)
+                        <div class="mt-2">
+                            <div class="flex items-center justify-between px-3 py-2 text-sm">
+                                <div class="flex items-center gap-3">
+                                    <div class="relative">
+                                        <img class="object-cover w-10 h-10 rounded-full"
+                                            src="{{ $onlineUser->media->first() != null ? $onlineUser->media->first()->getUrl() : Vite::asset('resources/images/default-avatar.png'); }}"
+                                            alt="{{ $onlineUser->name }}">
+                                        <span
+                                            class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                    </div>
+                                    <span>{{ $onlineUser->name }}</span>
                                 </div>
-                                <span>User 1</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-right">
-                                {{-- <span>{{ $onlineUser->last_seen->diffForHumans() }}</span> --}}
-                                <span></span>
+                                <div class="flex items-center gap-2 text-right">
+                                    <span>{{ \Carbon\Carbon::parse($onlineUser->last_seen)->diffForHumans() }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {{-- End Looping --}}
+                    @endforeach
                 </div>
                 <!-- end::online users -->
             </div>
