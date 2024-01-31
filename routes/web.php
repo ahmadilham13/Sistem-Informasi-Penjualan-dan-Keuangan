@@ -46,6 +46,7 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
             Route::get('', 'show')->name('show');
             Route::get('edit', 'edit')->name('edit');
             Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class);
+            Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class);
         });
     });
 

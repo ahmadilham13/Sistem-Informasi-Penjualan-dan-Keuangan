@@ -15,5 +15,9 @@
     <x-alert type="success" :show="true">
         <span class="font-medium">{{ __('User has been Activated successfully!') }}</span>
     </x-alert>
+@elseif (session('status') === 'user-deleted')
+    <x-alert type="success" :show="true">
+        <span class="font-medium">{{ __('User has been Deleted successfully!') }}</span>
+    </x-alert>
 @endif
 {{-- end::Alert --}}

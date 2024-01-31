@@ -71,9 +71,11 @@ class UserController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $user) : View
     {
-        //
+        return view('petugas.detail', [
+            'data'  => $user
+        ]);
     }
 
     /**
@@ -99,8 +101,10 @@ class UserController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $this->user->DeleteUser($user);
+
+        return redirect()->route('petugas.index')->with('status', 'user-deleted');
     }
 }

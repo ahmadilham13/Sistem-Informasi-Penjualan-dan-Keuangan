@@ -4,9 +4,10 @@
         <div>
           <ol class="flex gap-3 text-sm">
             <li class="breadcrumb-item text-gray-500"> <a href="{{ route(name: 'index', absolute: false) }}">Home</a> </li>
-            <li class="breadcrumb-item text-gray-500"><a href="{{ route('petugas.index') }}">Petugas</a></li>
+            <li class="breadcrumb-item text-gray-500"><a href="{{ route('petugas.index', absolute: false) }}">Petugas</a></li>
             @if (isset($data))
-              <li class="breadcrumb-item active text-indigo-500" aria-current="page">{{$data["name"]}}</li>
+              <li class="breadcrumb-item active text-gray-500"> <a href="{{ route('petugas.show', parameters : ['user' => $data['id']], absolute: false) }}">{{$data["name"]}}</a></li>
+              <li class="breadcrumb-item active text-indigo-500" aria-current="page">Edit Petugas</li>
             @else
               <li class="breadcrumb-item active text-indigo-500" aria-current="page">Add Petugas</li>
             @endif
