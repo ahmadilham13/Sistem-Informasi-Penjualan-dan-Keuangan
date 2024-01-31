@@ -67,7 +67,18 @@
         </div>
         <!-- end::Confirm Password Input -->
     </div>
-
+<!-- start::Avatar File Input -->
+<div class="flex flex-col">
+    <x-input-label for="avatar" :value="__('Avatar')" class="mb-3" />
+    <x-file-input id="avatar" name="avatar" accept="{{ '.'.implode(', .', config('filesystems.allowed_extensions_avatar')) }}" autofocus  />
+    <small class="text-gray-500">
+        Upload a avatar icon in either PNG or JPG format.
+        Maximum file size: 2MB.
+        Recommended resolution: 80x80 pixels.
+    </small>
+    <x-input-error class="mt-2" :messages="$errors->manageUserForm->get('avatar')" />
+</div>
+<!-- end::Avatar File Input -->
     <div class="flex justify-end gap-2 pt-8 pb-5">
         {{-- <button
             class="px-4 py-2 text-sm text-red-500 transition duration-150 rounded bg-red-50 hover:bg-red-500 hover:text-white"

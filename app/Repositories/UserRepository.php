@@ -32,10 +32,10 @@ class UserRepository implements UserInterface
 
         $user = DB::transaction(function () use($data, $request) {
             $user = User::query()->create($data);
-            // if($request->hasFile('avatar')) {
-            //     $user->addMediaFromRequest('avatar')
-            //         ->toMediaCollection();
-            // }
+            if($request->hasFile('avatar')) {
+                $user->addMediaFromRequest('avatar')
+                    ->toMediaCollection();
+            }
             return $user;
         });
 
@@ -51,11 +51,11 @@ class UserRepository implements UserInterface
         $data = $request->validated();
         $user = DB::transaction(function () use ($user, $data, $request) {
             $user->update($data);
-            // if($request->hasFile('avatar')) {
-            //     $user->media()->delete();
-            //     $user->addMediaFromRequest('avatar')
-            //         ->toMediaCollection();
-            // }
+            if($request->hasFile('avatar')) {
+                $user->media()->delete();
+                $user->addMediaFromRequest('avatar')
+                    ->toMediaCollection();
+            }
             return $user;
         });
 

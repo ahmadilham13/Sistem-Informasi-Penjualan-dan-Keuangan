@@ -57,7 +57,7 @@
                                 <x-table-data>
                                     <div class="flex items-center gap-3">
                                         <div class="relative">
-                                            <img src="{{ Vite::asset('resources/images/default-avatar.png') }}" width="42" height="42" alt="" class="rounded full">
+                                            <img src="{{ $item->media->last() != null ? $item->media->last()->getUrl() : Vite::asset('resources/images/default-avatar.png') }}" width="42" height="42" alt="" class="rounded full">
                                             <div class="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full bg-green-500"></div>
                                         </div>
                                     </div>

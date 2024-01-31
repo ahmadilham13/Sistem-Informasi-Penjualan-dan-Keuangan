@@ -5,7 +5,9 @@ namespace App\Http\Requests;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rules\Password;
+use Spatie\MediaLibrary\Support\File as SupportFile;
 
 class UserRequest extends FormRequest
 {
@@ -45,6 +47,11 @@ class UserRequest extends FormRequest
                 ->numbers()
                 ->symbols()
             ],
+            'avatar'  => [
+                'nullable',
+                File::types(config('filesystems.allowed_extensions_avatar'))
+                    ->max((int) config('filesystems.maximum_filesize'))
+            ]
         ];
 
         if($this->isMethod('put') && $this->password == null) {
@@ -52,5 +59,17 @@ class UserRequest extends FormRequest
         }
 
         return $rules;
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'avatar' => 'Avatar is failed to upload. Please check if file isnt more than '. SupportFile::getHumanReadableSize((int) config('filesystems.maximum_filesize') * 1024) .' and is a supported file type',
+        ];
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
 return [
-
+    'allowed_extensions_avatar' => explode(',', (string) env('ALLOWED_EXTENSION_AVATAR', 'jpg,jpeg,png')),
+    'maximum_filesize' => env('MAX_FILESIZE', 2048),
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
