@@ -1,5 +1,5 @@
 <div>
-    <form action="{{ route(name: 'petugas.index', absolute: false) }}" method="get" class="flex items-center gap-3">
+    <form action="{{ route(name: 'product.index', absolute: false) }}" method="get" class="flex items-center gap-3">
         @csrf
         <div>
             <x-text-input type="text" name="search" placeholder="Search..." :value="!empty($search) ? $search : ''" />
