@@ -34,6 +34,7 @@
                 <!-- start:: Info Table -->
                 <x-table>
                     <x-slot name="tableHeaders">
+                        <x-table-header />
                         <x-table-header>
                             {{ __('Name') }}
                         </x-table-header>
@@ -53,6 +54,14 @@
                     <x-slot name="tableBody">
                         @foreach ($data as $item)
                             <x-table-row>
+                                <x-table-data>
+                                    <div class="flex items-center gap-3">
+                                        <div class="relative">
+                                            <img src="{{ Vite::asset('resources/images/default-avatar.png') }}" width="42" height="42" alt="" class="rounded full">
+                                            <div class="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full bg-green-500"></div>
+                                        </div>
+                                    </div>
+                                </x-table-data>
                                 <x-table-data>{{ $item->name }}</x-table-data>
                                 <x-table-data>{{ $item->email }}</x-table-data>
                                 <x-table-data>{{ !empty($item->last_seen) ? $item->last_seen : '-' }}</x-table-data>

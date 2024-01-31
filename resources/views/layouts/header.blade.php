@@ -27,7 +27,7 @@
         <div x-data="{ linkActive: false }" class="relative">
           <!-- start::Main link -->
           <div @click="linkActive = !linkActive" class="cursor-pointer">
-            <img src="https://source.unsplash.com/500x500/?user" class="w-10 rounded-full" />
+            <img src="{{ Vite::asset('resources/images/default-avatar.png') }}" class="w-10 rounded-full" />
           </div>
           <!-- end::Main link -->
   
