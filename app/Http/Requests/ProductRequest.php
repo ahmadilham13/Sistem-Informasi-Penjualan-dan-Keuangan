@@ -27,7 +27,6 @@ class ProductRequest extends FormRequest
         $rules = [
             'product_id'        => ['string'],
             'product_name'      => ['required', 'string'],
-            'harga_beli'        => ['required'],
             'harga_jual'        => ['required'],
             'stock'             => ['required'],
             'product_image'  => [

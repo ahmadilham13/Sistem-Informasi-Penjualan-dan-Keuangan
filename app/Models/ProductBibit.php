@@ -15,7 +15,6 @@ class ProductBibit extends Model implements HasMedia
     protected $fillable = [
         'product_id',
         'product_name',
-        'harga_beli',
         'harga_jual',
         'stock'
     ];

@@ -4,7 +4,6 @@
     x-data="{ form: $form(@js($method), '{{ $action }}', {
         product_id: '{{ old('product_id', isset($data['product_id']) ? $data['product_id'] : '') }}',
         product_name: '{{ old('product_name', isset($data['product_name']) ? $data['product_name'] : '') }}',
-        harga_beli: '{{ old('harga_beli', isset($data['harga_beli']) ? $data['harga_beli'] : '') }}',
         harga_jual: '{{ old('harga_jual', isset($data['harga_jual']) ? $data['harga_jual'] : '') }}',
         stock: '{{ old('stock', isset($data['stock']) ? $data['stock'] : '') }}',
     }) }"
@@ -44,19 +43,6 @@
         </div>
         <!-- end::Product Name Input -->
 
-        <!-- start::Harga Beli Input -->
-        <div class="flex flex-col">
-            <div class="flex">
-                <x-input-label for="harga_beli" :value="__('Harga Beli')" class="font-normal" />
-                <span class="text-red-400">*</span>
-            </div>
-            <x-text-input id="harga_beli" name="harga_beli" type="text" placeholder="Harga Beli..."
-                class="py-1 mt-2 border-gray-300 focus:border-gray-300 focus:outline-none focus:ring-0"
-                x-model="form.harga_beli"
-                required autofocus autocomplete="harga_beli" 
-                @change="form.validate('harga_beli')"/>
-            <x-input-error class="mt-2" type="harga_beli" />
-        </div>
         <!-- end::Harga Beli Input -->
 
         <!-- start::Harga Jual Input -->

@@ -42,9 +42,6 @@
                             {{ __('Nama Bibit') }}
                         </x-table-header>
                         <x-table-header>
-                            {{ __('Harga Beli') }}
-                        </x-table-header>
-                        <x-table-header>
                             {{ __('Harga Jual') }}
                         </x-table-header>
                         <x-table-header>
@@ -67,7 +64,6 @@
                                 </x-table-data>
                                 <x-table-data>{{ $item->product_id }}</x-table-data>
                                 <x-table-data>{{ $item->product_name }}</x-table-data>
-                                <x-table-data>{{ $item->harga_beli }}</x-table-data>
                                 <x-table-data>{{ $item->harga_jual }}</x-table-data>
                                 <x-table-data>{{ $item->stock }}</x-table-data>
                                 <x-table-data>{{ $item->created_at }}</x-table-data>
