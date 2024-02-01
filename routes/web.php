@@ -5,7 +5,9 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Laporan\LaporanController;
 use App\Http\Controllers\Petugas\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Saldo\SaldoController;
 use App\Http\Controllers\Transaksi\TransaksiController;
+use App\Models\Saldo;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,12 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
         Route::get('', 'edit')->name('edit');
         Route::put('avatar', 'changeAvatar')->name('avatar');
         Route::patch('', 'update')->name('update');
+    });
+
+    Route::prefix('saldo/')->name('saldo.')->controller(SaldoController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::get('add', 'create')->name('create');
+        Route::post('', 'store')->name('store');
     });
 
     Route::prefix('petugas/')->name('petugas.')->controller(UserController::class)->group(function () {

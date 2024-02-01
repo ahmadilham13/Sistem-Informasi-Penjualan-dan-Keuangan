@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use App\Interfaces\ProductInterface;
+use App\Interfaces\ProsesUangInterface;
+use App\Interfaces\SaldoInterface;
 use App\Interfaces\UserInterface;
 use App\Repositories\ProductRepository;
+use App\Repositories\ProsesUangRepository;
+use App\Repositories\SaldoRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,6 +18,8 @@ class RepositoryServiceProvider extends ServiceProvider
         // interface => // repository
         UserInterface::class => UserRepository::class,
         ProductInterface::class => ProductRepository::class,
+        SaldoInterface::class => SaldoRepository::class,
+        ProsesUangInterface::class => ProsesUangRepository::class,
     ];
     /**
      * Register services.
