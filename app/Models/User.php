@@ -60,4 +60,9 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsTo(RoleUser::class);
     }
+
+    public function proses_uang()
+    {
+        return $this->belongsToMany(proses_uang::class, 'proses_uang')->withTimestamps();
+    }
 }
