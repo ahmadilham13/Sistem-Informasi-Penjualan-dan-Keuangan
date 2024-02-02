@@ -9,6 +9,7 @@ enum NamaProses: int
 {
     case TRANSAKSI = 0;
     case BELI = 1;
+    case SALDO = 2;
 
     public static function getDisplayName($type)
     {
@@ -17,6 +18,8 @@ enum NamaProses: int
                 return 'Transaksi Penjualan';
             case self::BELI:
                 return 'Transaksi Pembelian';
+            case self::SALDO:
+                return 'Menambah Saldo';
             default:
                 return 'Unknown Type';
         }

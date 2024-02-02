@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Saldo;
 
+use App\Enums\NamaProses;
+use App\Enums\TypeProses;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaldoRequest;
 use Illuminate\Http\RedirectResponse;
@@ -37,6 +39,7 @@ class SaldoController extends BaseController
     public function store(SaldoRequest $request) : RedirectResponse
     {
         $this->saldo->UpdateSaldo($request);
+        $this->uang->CreateUangLog(namaProses: NamaProses::SALDO, typeProses: TypeProses::MASUK, nominal: $request->saldo);
         return redirect()->route('saldo.index')->with('status', 'saldo-added');
     }
 

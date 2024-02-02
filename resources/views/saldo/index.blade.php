@@ -27,22 +27,29 @@
             <div class="mb-4">
                 <h3 class="text-xl font-semibold mb-2">Log Aktivitas</h3>
                 
+                <ul class="overflow-y-auto max-h-40">                
                 @forelse ($activities as $activity)
-                <ul class="overflow-y-auto max-h-40">
-                    <li class="mb-2">
-                        <span class="text-green-500">Uang Masuk:</span>
-                        <span class="text-gray-600">Rp 500.000 - 01/02/2024 09:30 AM</span>
-                    </li>
-                    <li class="mb-2">
-                        <span class="text-red-500">Uang Keluar:</span>
-                        <span class="text-gray-600">Rp 200.000 - 01/02/2024 02:45 PM</span>
-                    </li>
-                </ul>
-                @empty
-                <x-data-empty>
-                    {{ __('Activity`s Empty') }}
-                </x-data-empty>
-                @endforelse
+                        @switch($activity->type_proses)
+                            @case(App\Enums\TypeProses::MASUK)
+                                <li class="mb-2">
+                                    <span class="text-green-500">{{App\Enums\NamaProses::getDisplayName($activity->nama_proses)}}:</span>
+                                    <span class="text-gray-600">Rp {{$activity->nominal}} - {{ $activity->created_at }}</span>
+                                </li>                                
+                                @break
+                            @case(App\Enums\TypeProses::KELUAR)
+                                <li class="mb-2">
+                                    <span class="text-red-500">{{App\Enums\NamaProses::getDisplayName($activity->nama_proses)}}:</span>
+                                    <span class="text-gray-600">Rp {{$activity->nominal}} - {{ $activity->created_at }}</span>
+                                </li>
+                                @break
+                            @default
+                        @endswitch
+                        @empty
+                        <x-data-empty>
+                            {{ __('Activity`s Empty') }}
+                        </x-data-empty>
+                        @endforelse
+                    </ul>
                     
             </div>
 
