@@ -6,7 +6,7 @@
         <select id="saldo" name="saldo" class="border p-2 w-full">
             <option value="10000">Rp 10,000</option>
             <option value="25000">Rp 25,000</option>
-            <option value="25000">Rp 50,000</option>
+            <option value="50000">Rp 50,000</option>
             <option value="100000">Rp 100,000</option>
             <option value="500000">Rp 500,000</option>
             <option value="1000000">Rp 1,000,000</option>

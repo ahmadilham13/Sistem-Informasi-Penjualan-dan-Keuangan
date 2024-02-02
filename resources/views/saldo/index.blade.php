@@ -18,6 +18,8 @@
                 <p class="text-gray-600">Saldo Anda saat ini:</p>
                 @if (empty($data->saldo))
                     <p class="text-3xl font-bold text-red-500">Rp 0</p>
+                @elseif($data->saldo < 0)
+                    <p class="text-3xl font-bold text-red-500">Rp {{ $data->saldo }}</p>
                 @else
                 <p class="text-3xl font-bold text-green-500">Rp {{ $data->saldo }}</p>
                 @endif

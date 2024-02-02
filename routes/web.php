@@ -3,6 +3,7 @@
 use App\Http\Controllers\Bibit\ProductController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Laporan\LaporanController;
+use App\Http\Controllers\Modal\ModalController;
 use App\Http\Controllers\Petugas\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Saldo\SaldoController;
@@ -44,6 +45,19 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
         Route::get('', 'index')->name('index');
         Route::get('add', 'create')->name('create');
         Route::post('', 'store')->name('store');
+    });
+
+    Route::prefix('modal/')->name('modal.')->controller(ModalController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::get('add', 'create')->name('create');
+        Route::post('', 'store')->name('store');
+
+        Route::prefix('{modal}/')->group(function () {
+            Route::get('', 'show')->name('show');
+            Route::get('edit', 'edit')->name('edit');
+            Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class);
+            Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class);
+        });
     });
 
     Route::prefix('petugas/')->name('petugas.')->controller(UserController::class)->group(function () {

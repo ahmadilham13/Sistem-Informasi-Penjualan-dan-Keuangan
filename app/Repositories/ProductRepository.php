@@ -15,7 +15,7 @@ class ProductRepository implements ProductInterface
     public function GetPaginatedProduct(string $search, string $sortBy, string $sortDirection, int $perPage = 10, int $currentPage = 1): LengthAwarePaginator
     {
         return ProductBibit::query()
-            ->when(!empty($search), fn(Builder $query) => $query->where(DB::raw('lower(product_name)'), 'like', '%' . strtolower($search) . '%'))
+            ->when(!empty($search), fn(Builder $query) => $query->where(DB::raw('lower(product_name)'), 'like', '%' . strtolower($search) . '%')->orWhere(DB::raw('lower(product_id)'), 'like', '%' . strtolower($search) . '%'))
             ->when(! empty($sortBy) && ! empty($sortDirection), fn (Builder $query) => $query->orderBy($sortBy, $sortDirection))
             ->when(empty($sortBy) && empty($sortDirection), fn (Builder $query) => $query->oldest())
             ->paginate(perPage: $perPage, page: $currentPage);

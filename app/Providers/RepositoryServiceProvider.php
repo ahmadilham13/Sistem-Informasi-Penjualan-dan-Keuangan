@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Interfaces\ModalInterface;
 use App\Interfaces\ProductInterface;
 use App\Interfaces\ProsesUangInterface;
 use App\Interfaces\SaldoInterface;
 use App\Interfaces\UserInterface;
+use App\Repositories\ModalRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProsesUangRepository;
 use App\Repositories\SaldoRepository;
@@ -20,6 +22,7 @@ class RepositoryServiceProvider extends ServiceProvider
         ProductInterface::class => ProductRepository::class,
         SaldoInterface::class => SaldoRepository::class,
         ProsesUangInterface::class => ProsesUangRepository::class,
+        ModalInterface::class => ModalRepository::class,
     ];
     /**
      * Register services.
