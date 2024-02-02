@@ -16,6 +16,7 @@ class ProductBibit extends Model implements HasMedia
         'product_id',
         'product_name',
         'harga_jual',
-        'stock'
+        'stock',
+        'description',
     ];
 }

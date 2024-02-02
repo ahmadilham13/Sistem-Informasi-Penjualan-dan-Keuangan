@@ -74,6 +74,14 @@
         </div>
         <!-- end::Stock Input -->
     </div>
+    
+    <!-- start::Description Input -->
+    <div class="flex flex-col">
+        <x-input-label for="description" :value="__('Description')" />
+        <x-textarea id="description" name="description" type="text" class="block w-full mt-1" :value="old('description', isset($data->description) ? $data->description : '')" autofocus autocomplete="description"/>
+        <x-input-error class="mt-2" :messages="$errors->get('description')" />
+    </div>
+    <!-- end::Description Input -->
 
     <!-- start::Product Image File Input -->
     <div class="flex flex-col">

@@ -29,6 +29,7 @@ class ProductRequest extends FormRequest
             'product_name'      => ['required', 'string'],
             'harga_jual'        => ['required'],
             'stock'             => ['required'],
+            'description'       => ['nullable', 'string'],
             'product_image'  => [
                 'nullable',
                 File::types(config('filesystems.allowed_extensions_avatar'))

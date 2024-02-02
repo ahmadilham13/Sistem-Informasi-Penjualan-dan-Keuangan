@@ -25,20 +25,6 @@
         </div>
         <!-- end::Name Input -->
 
-        <!-- start::Description Input -->
-        <div class="flex flex-col">
-            <div class="flex">
-                <x-input-label for="description" :value="__('Description')" class="font-normal" />
-            </div>
-            <x-text-input id="description" name="description" type="text" placeholder="Description..."
-                class="py-1 mt-2 border-gray-300 focus:border-gray-300 focus:outline-none focus:ring-0"
-                x-model="form.description"
-                autofocus autocomplete="description" 
-                @change="form.validate('description')"/>
-            <x-input-error class="mt-2" type="description" />
-        </div>
-        <!-- end::Description Input -->
-
         <!-- start::Harga Input -->
         <div class="flex flex-col">
             <div class="flex">
@@ -54,6 +40,15 @@
         </div>
         <!-- end::Email Input -->
     </div>
+
+    <!-- start::Description Input -->
+    <div class="flex flex-col">
+        <x-input-label for="description" :value="__('Description')" />
+        <x-textarea id="description" name="description" type="text" class="block w-full mt-1" :value="old('description', isset($data->description) ? $data->description : '')" autofocus autocomplete="description"/>
+            <x-input-error class="mt-2" :messages="$errors->get('description')" />
+    </div>
+    <!-- end::Description Input -->
+
     <div class="flex justify-end gap-2 pt-8 pb-5">
         {{-- <button
             class="px-4 py-2 text-sm text-red-500 transition duration-150 rounded bg-red-50 hover:bg-red-500 hover:text-white"
