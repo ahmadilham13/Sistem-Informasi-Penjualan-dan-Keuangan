@@ -5,14 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Transaksi extends Model
+class Kasir extends Model
 {
     use HasFactory, SoftDeletes;
 
-    
+    protected $fillable = [
+        'product_bibits_id',
+        'user_id',
+        'quantity',
+    ];
+
+
+
     /**
      * Product Bibit
      *
@@ -20,11 +26,11 @@ class Transaksi extends Model
      */
     public function productBibit() : BelongsTo
     {
-        return $this->belongsTo(ProductBibit::class);
+        return $this->belongsTo(ProductBibit::class, "product_bibits_id");
     }
 
     /**
-     * Get the user that owns the Transaksi
+     * Get the user that owns the Kasir
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -24,7 +24,7 @@ class ProductBibitSeeder extends Seeder
         ]);
         DB::table('product_bibits')->insert([
             'product_id'    => 'KD00002',
-            'product_name' => 'Jambu Krista;',
+            'product_name' => 'Jambu Krista',
             'description' => "",
             'harga_jual'  => 70000,
             'stock' => 30,

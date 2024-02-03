@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Bibit\ProductController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Kasir\KasirController;
 use App\Http\Controllers\Laporan\LaporanController;
 use App\Http\Controllers\Modal\ModalController;
 use App\Http\Controllers\Petugas\UserController;
@@ -88,6 +89,20 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
 
     Route::prefix('transaksi/')->name('transaksi.')->controller(TransaksiController::class)->group(function () {
         Route::get('', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class);
+
+        Route::prefix('{transaksi}/')->group(function () {
+            Route::get('', 'show')->name('show');
+        });
+    });
+
+    Route::prefix('kasir/')->name('kasir.')->controller(KasirController::class)->group(function () {
+        Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class);
+
+        Route::prefix('{kasir}/')->group(function () {
+            Route::delete('', 'destroy')->name('destroy');
+        });
     });
 
     Route::prefix('laporan/')->name('laporan.')->controller(LaporanController::class)->group(function () {

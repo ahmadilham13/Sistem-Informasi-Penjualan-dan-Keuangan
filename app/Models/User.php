@@ -65,4 +65,14 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(proses_uang::class, 'proses_uang')->withTimestamps();
     }
+
+    public function transaksi()
+    {
+        return $this->belongsToMany(Transaksi::class, 'transaksi')->withTimestamps();
+    }
+
+    public function kasir()
+    {
+        return $this->belongsToMany(Kasir::class, 'kasir')->withTimestamps();
+    }
 }

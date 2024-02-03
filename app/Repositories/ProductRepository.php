@@ -8,6 +8,7 @@ use App\Interfaces\ProductInterface;
 use App\Models\ProductBibit;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 
 class ProductRepository implements ProductInterface
@@ -19,6 +20,16 @@ class ProductRepository implements ProductInterface
             ->when(! empty($sortBy) && ! empty($sortDirection), fn (Builder $query) => $query->orderBy($sortBy, $sortDirection))
             ->when(empty($sortBy) && empty($sortDirection), fn (Builder $query) => $query->oldest())
             ->paginate(perPage: $perPage, page: $currentPage);
+    }
+
+    public function GetAllProduct(string $search): AnonymousResourceCollection
+    {
+        $collection = ProductBibit::query()
+            ->when(!empty($search), fn(Builder $query) => $query->where(DB::raw('lower(product_name)'), 'like', '%' . strtolower($search) . '%'))
+            ->with('media')
+            ->get();
+
+        return ProductResource::collection($collection);
     }
 
     public function CreateProduct(ProductRequest $request): ProductResource
