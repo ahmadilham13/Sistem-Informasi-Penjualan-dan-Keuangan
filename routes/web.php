@@ -43,47 +43,47 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
     });
 
     Route::prefix('saldo/')->name('saldo.')->controller(SaldoController::class)->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::get('add', 'create')->name('create');
-        Route::post('', 'store')->name('store');
+        Route::get('', 'index')->name('index')->can('saldo.index');
+        Route::get('add', 'create')->name('create')->can('saldo.store');
+        Route::post('', 'store')->name('store')->can('saldo.store');
     });
 
     Route::prefix('modal/')->name('modal.')->controller(ModalController::class)->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::get('add', 'create')->name('create');
-        Route::post('', 'store')->name('store');
+        Route::get('', 'index')->name('index')->can('modal.index');
+        Route::get('add', 'create')->name('create')->can('modal.store');
+        Route::post('', 'store')->name('store')->can('modal.store');
 
         Route::prefix('{modal}/')->group(function () {
-            Route::get('', 'show')->name('show');
-            Route::get('edit', 'edit')->name('edit');
-            Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class);
-            Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class);
+            Route::get('', 'show')->name('show')->can('modal.show', 'modal');
+            Route::get('edit', 'edit')->name('edit')->can('modal.update', 'modal');
+            Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class)->can('modal.update', 'modal');
+            Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class)->can('modal.destroy', 'modal');
         });
     });
 
     Route::prefix('petugas/')->name('petugas.')->controller(UserController::class)->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::get('create', 'create')->name('create');
-        Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class);
+        Route::get('', 'index')->name('index')->can('petugas.index');
+        Route::get('create', 'create')->name('create')->can('petugas.store');
+        Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class)->can('petugas.store');
 
         Route::prefix('{user}/')->group(function () {
-            Route::get('', 'show')->name('show');
-            Route::get('edit', 'edit')->name('edit');
-            Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class);
-            Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class);
+            Route::get('', 'show')->name('show')->can('petugas.show', 'user');
+            Route::get('edit', 'edit')->name('edit')->can('petugas.update', 'user');
+            Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class)->can('petugas.update', 'user');
+            Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class)->can('petugas.destroy', 'index');
         });
     });
 
     Route::prefix('product/')->name('product.')->controller(ProductController::class)->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::get('create', 'create')->name('create');
-        Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class);
+        Route::get('', 'index')->name('index')->can('product.index');
+        Route::get('create', 'create')->name('create')->can('product.store');
+        Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class)->can('product.store');
 
         Route::prefix('{product}/')->group(function () {
-            Route::get('', 'show')->name('show');
-            Route::get('edit', 'edit')->name('edit');
-            Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class);
-            Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class);
+            Route::get('', 'show')->name('show')->can('product.show', 'product');
+            Route::get('edit', 'edit')->name('edit')->can('product.update', 'product');
+            Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class)->can('product.update', 'product');
+            Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class)->can('product.destroy', 'product');
         });
     });
 

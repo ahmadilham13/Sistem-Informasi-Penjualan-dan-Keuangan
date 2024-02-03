@@ -20,62 +20,71 @@
       </a>
       <!-- end::Menu link -->
   
-      <!-- start::Menu link -->
-      <div x-data="{ linkHover: false, linkActive: @js(in_array('/'.request()->segment(1), [route(name: 'saldo.index', absolute: false), route(name: 'modal.index', absolute: false), route(name: 'petugas.index', absolute: false), route(name: 'product.index', absolute: false)]) ? true : false) }">
-        <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive" class="flex items-center justify-between px-6 py-3 text-gray-300 transition duration-200 cursor-pointer hover:text-gray-100 hover:bg-black hover:bg-opacity-30" :class=" linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
-          <div class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" :class=" linkHover || linkActive ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+      @can('modal.index')
+        <!-- start::Menu link -->
+        <div x-data="{ linkHover: false, linkActive: @js(in_array('/'.request()->segment(1), [route(name: 'saldo.index', absolute: false), route(name: 'modal.index', absolute: false), route(name: 'petugas.index', absolute: false), route(name: 'product.index', absolute: false)]) ? true : false) }">
+          <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive" class="flex items-center justify-between px-6 py-3 text-gray-300 transition duration-200 cursor-pointer hover:text-gray-100 hover:bg-black hover:bg-opacity-30" :class=" linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" :class=" linkHover || linkActive ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+              </svg>
+              <span class="ml-3">Master</span>
+            </div>
+            <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
-            <span class="ml-3">Master</span>
           </div>
-          <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
+          <!-- start::Submenu -->
+          <ul x-show="linkActive" x-cloak x-collapse.duration.300ms class="text-gray-200">
+
+            @can('saldo.index')
+              <!-- start::Submenu link -->
+              <li class="py-2 pl-10 pr-6 transition duration-200 cursor-pointer hover:bg-black hover:bg-opacity-30 hover:text-gray-100">
+                <a href="{{ route(name: 'saldo.index', absolute: false) }}" class="flex items-center">
+                  <span class="mr-2 text-sm">&bull;</span>
+                  <span class="overflow-ellipsis">Saldo</span>
+                </a>
+              </li>
+              <!-- end::Submenu link -->
+            @endcan
+
+            @can('modal.index')
+              <!-- start::Submenu link -->
+              <li class="py-2 pl-10 pr-6 transition duration-200 cursor-pointer hover:bg-black hover:bg-opacity-30 hover:text-gray-100">
+                <a href="{{ route(name: 'modal.index', absolute: false) }}" class="flex items-center">
+                  <span class="mr-2 text-sm">&bull;</span>
+                  <span class="overflow-ellipsis">Modal</span>
+                </a>
+              </li>
+              <!-- end::Submenu link -->
+            @endcan
+
+            @can('petugas.index')
+              <!-- start::Submenu link -->
+              <li class="py-2 pl-10 pr-6 transition duration-200 cursor-pointer hover:bg-black hover:bg-opacity-30 hover:text-gray-100">
+                <a href="{{ route(name: 'petugas.index', absolute: false) }}" class="flex items-center">
+                  <span class="mr-2 text-sm">&bull;</span>
+                  <span class="overflow-ellipsis">Petugas</span>
+                </a>
+              </li>
+              <!-- end::Submenu link -->
+            @endcan
+    
+            @can('product.index')
+              <!-- start::Submenu link -->
+              <li class="py-2 pl-10 pr-6 transition duration-200 cursor-pointer hover:bg-black hover:bg-opacity-30 hover:text-gray-100">
+                <a href="{{ route(name: 'product.index', absolute: false) }}" class="flex items-center">
+                  <span class="mr-2 text-sm">&bull;</span>
+                  <span class="overflow-ellipsis">Product Bibit</span>
+                </a>
+              </li>
+              <!-- end::Submenu link -->
+            @endcan
+          </ul>
+          <!-- end::Submenu -->
         </div>
-        <!-- start::Submenu -->
-        <ul x-show="linkActive" x-cloak x-collapse.duration.300ms class="text-gray-200">
-
-          <!-- start::Submenu link -->
-          <li class="py-2 pl-10 pr-6 transition duration-200 cursor-pointer hover:bg-black hover:bg-opacity-30 hover:text-gray-100">
-            <a href="{{ route(name: 'saldo.index', absolute: false) }}" class="flex items-center">
-              <span class="mr-2 text-sm">&bull;</span>
-              <span class="overflow-ellipsis">Saldo</span>
-            </a>
-          </li>
-          <!-- end::Submenu link -->
-
-          <!-- start::Submenu link -->
-          <li class="py-2 pl-10 pr-6 transition duration-200 cursor-pointer hover:bg-black hover:bg-opacity-30 hover:text-gray-100">
-            <a href="{{ route(name: 'modal.index', absolute: false) }}" class="flex items-center">
-              <span class="mr-2 text-sm">&bull;</span>
-              <span class="overflow-ellipsis">Modal</span>
-            </a>
-          </li>
-          <!-- end::Submenu link -->
-
-          <!-- start::Submenu link -->
-          <li class="py-2 pl-10 pr-6 transition duration-200 cursor-pointer hover:bg-black hover:bg-opacity-30 hover:text-gray-100">
-            <a href="{{ route(name: 'petugas.index', absolute: false) }}" class="flex items-center">
-              <span class="mr-2 text-sm">&bull;</span>
-              <span class="overflow-ellipsis">Petugas</span>
-            </a>
-          </li>
-          <!-- end::Submenu link -->
-  
-          <!-- start::Submenu link -->
-          <li class="py-2 pl-10 pr-6 transition duration-200 cursor-pointer hover:bg-black hover:bg-opacity-30 hover:text-gray-100">
-            <a href="{{ route(name: 'product.index', absolute: false) }}" class="flex items-center">
-              <span class="mr-2 text-sm">&bull;</span>
-              <span class="overflow-ellipsis">Product Bibit</span>
-            </a>
-          </li>
-          <!-- end::Submenu link -->
-        </ul>
-        <!-- end::Submenu -->
-      </div>
-      <!-- end::Menu link -->
-  
+        <!-- end::Menu link -->
+      @endcan
       <!-- start::Menu link -->
       <a x-data="{ linkHover: false, linkActive: @js(in_array('/'.request()->segment(1), [route(name: 'transaksi.index', absolute: false)]) ? true : false) }" @mouseover="linkHover = true" @mouseleave="linkHover = false" href="{{ route(name: 'transaksi.index', absolute: false) }}" class="flex items-center px-6 py-3 text-gray-300 transition duration-200 cursor-pointer" :class="linkHover || linkActive ? 'bg-black bg-opacity-30' : ''">
         <svg class="w-5 h-5 transition duration-200" :class="linkHover ? 'text-gray-100' : ''" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
