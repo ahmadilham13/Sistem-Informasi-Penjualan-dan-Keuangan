@@ -23,7 +23,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::before(function ($user, $ability) {
-            if ($user->roleUser->permissions->where('route', 'superadmin')->count() > 0) {
+            if ($user->roleUser->permissions->where('route', 'superadmin')->count() > 0 && ! in_array($ability, config('permission.skips'))) {
                 return true;
             }
         });
