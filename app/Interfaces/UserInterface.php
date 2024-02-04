@@ -6,10 +6,12 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 interface UserInterface
 {
+    public function GetAllUser() : Collection;
     public function GetPaginatedUser(string $search, string $sortBy, string $sortDirection, int $perPage = 10, int $currentPage = 1) : LengthAwarePaginator;
     public function GetOnlineUsers() : AnonymousResourceCollection;
     public function CreateUser(UserRequest $request) : UserResource;

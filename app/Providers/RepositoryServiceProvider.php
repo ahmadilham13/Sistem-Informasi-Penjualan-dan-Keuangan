@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Interfaces\ActivityInterface;
+use App\Interfaces\GajiInterface;
 use App\Interfaces\KasirInterface;
 use App\Interfaces\ModalInterface;
 use App\Interfaces\ProductInterface;
@@ -11,6 +12,7 @@ use App\Interfaces\SaldoInterface;
 use App\Interfaces\TransaksiInterface;
 use App\Interfaces\UserInterface;
 use App\Repositories\ActivityRepository;
+use App\Repositories\GajiRepository;
 use App\Repositories\KasirRepository;
 use App\Repositories\ModalRepository;
 use App\Repositories\ProductRepository;
@@ -32,6 +34,7 @@ class RepositoryServiceProvider extends ServiceProvider
         TransaksiInterface::class => TransaksiRepository::class,
         KasirInterface::class => KasirRepository::class,
         ActivityInterface::class => ActivityRepository::class,
+        GajiInterface::class => GajiRepository::class,
     ];
     /**
      * Register services.

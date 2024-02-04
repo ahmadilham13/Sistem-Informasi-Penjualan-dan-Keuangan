@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Bibit\ProductController;
+use App\Http\Controllers\Gaji\GajiController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Kasir\KasirController;
 use App\Http\Controllers\Laporan\LaporanController;
@@ -85,6 +86,12 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
             Route::put('', 'update')->name('update')->middleware(HandlePrecognitiveRequests::class)->can('product.update', 'product');
             Route::delete('', 'destroy')->name('destroy')->middleware(HandlePrecognitiveRequests::class)->can('product.destroy', 'product');
         });
+    });
+
+    Route::prefix('gaji/')->name('gaji.')->controller(GajiController::class)->group(function () {
+        Route::get('', 'index')->name('index')->can('gaji.index');
+        Route::get('create', 'create')->name('create')->can('gaji.store');
+        Route::post('', 'store')->name('store')->can('gaji.store');
     });
 
     Route::prefix('transaksi/')->name('transaksi.')->controller(TransaksiController::class)->group(function () {

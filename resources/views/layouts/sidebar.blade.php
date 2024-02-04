@@ -22,7 +22,7 @@
   
       @can('modal.index')
         <!-- start::Menu link -->
-        <div x-data="{ linkHover: false, linkActive: @js(in_array('/'.request()->segment(1), [route(name: 'saldo.index', absolute: false), route(name: 'modal.index', absolute: false), route(name: 'petugas.index', absolute: false), route(name: 'product.index', absolute: false)]) ? true : false) }">
+        <div x-data="{ linkHover: false, linkActive: @js(in_array('/'.request()->segment(1), [route(name: 'saldo.index', absolute: false), route(name: 'modal.index', absolute: false), route(name: 'petugas.index', absolute: false), route(name: 'product.index', absolute: false), route(name: 'gaji.index', absolute: false)]) ? true : false) }">
           <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive" class="flex items-center justify-between px-6 py-3 text-gray-300 transition duration-200 cursor-pointer hover:text-gray-100 hover:bg-black hover:bg-opacity-30" :class=" linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
             <div class="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" :class=" linkHover || linkActive ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,6 +76,17 @@
                 <a href="{{ route(name: 'product.index', absolute: false) }}" class="flex items-center">
                   <span class="mr-2 text-sm">&bull;</span>
                   <span class="overflow-ellipsis">Product Bibit</span>
+                </a>
+              </li>
+              <!-- end::Submenu link -->
+            @endcan
+
+            @can('gaji.index')
+              <!-- start::Submenu link -->
+              <li class="py-2 pl-10 pr-6 transition duration-200 cursor-pointer hover:bg-black hover:bg-opacity-30 hover:text-gray-100">
+                <a href="{{ route(name: 'gaji.index', absolute: false) }}" class="flex items-center">
+                  <span class="mr-2 text-sm">&bull;</span>
+                  <span class="overflow-ellipsis">Gaji Karyawan</span>
                 </a>
               </li>
               <!-- end::Submenu link -->

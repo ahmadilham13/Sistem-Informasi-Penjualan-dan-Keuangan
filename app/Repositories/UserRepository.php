@@ -10,11 +10,19 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 
 class UserRepository implements UserInterface
 {
+    public function GetAllUser(): Collection
+    {
+        return User::query()
+            ->where('role_user_id', '=', 2)
+            ->get();
+    }
+
     public function GetPaginatedUser(string $search, string $sortBy, string $sortDirection, int $perPage = 10, int $currentPage = 1) : LengthAwarePaginator
     {
         return User::query()
