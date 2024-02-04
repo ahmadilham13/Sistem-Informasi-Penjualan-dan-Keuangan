@@ -14,7 +14,7 @@ class ActivityRepository implements ActivityInterface
             ->withTrashed()
             ->with(['user', 'petugas', 'product_bibit', 'modal', 'transaksi'])
             ->orderBy('activities.id', 'desc')
-            ->paginate(perPage: 20);
+            ->paginate(perPage: 10);
     }
 }
 

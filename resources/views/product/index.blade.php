@@ -64,7 +64,7 @@
                                 </x-table-data>
                                 <x-table-data>{{ $item->product_id }}</x-table-data>
                                 <x-table-data>{{ $item->product_name }}</x-table-data>
-                                <x-table-data>{{ $item->harga_jual }}</x-table-data>
+                                <x-table-data>Rp. {{ number_format($item->harga_jual, 0, ',', '.') }}</x-table-data>
                                 <x-table-data>{{ $item->stock }}</x-table-data>
                                 <x-table-data>{{ $item->created_at }}</x-table-data>
                                 <x-table-actions>

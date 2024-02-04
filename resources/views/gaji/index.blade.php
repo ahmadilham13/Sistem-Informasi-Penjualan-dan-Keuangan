@@ -64,7 +64,7 @@
                                     </div>
                                 </x-table-data>
                                 <x-table-data>{{ $item->user->name }}</x-table-data>
-                                <x-table-data>Rp {{ $item->nominal }}</x-table-data>
+                                <x-table-data>Rp {{ number_format($item->nominal, 0, ',', '.') }}</x-table-data>
                                 <x-table-data>{{ $item->created_at }}</x-table-data>
                             </x-table-row>
                         @endforeach
