@@ -15,7 +15,7 @@ class TransaksiRequest extends FormRequest
     {
         return [
             'customer_name' => ['required'],
-            'quantity'      => ['required', 'int'],
+            'quantity.*'      => ['required', 'int'],
         ];
     }
 }

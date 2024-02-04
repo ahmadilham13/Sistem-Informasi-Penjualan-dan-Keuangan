@@ -7,9 +7,9 @@
     <x-alert type="success" :show="true">
         <span class="font-medium">{{ __('Product has been Deleted From Kasir!') }}</span>
     </x-alert>
-@elseif (session('status') === 'user-deleted')
+@elseif (session('status') === 'transaksi-added')
     <x-alert type="success" :show="true">
-        <span class="font-medium">{{ __('User has been Deleted successfully!') }}</span>
+        <span class="font-medium">{{ __('The Transaction has Been Added successfully!') }}</span>
     </x-alert>
 @endif
 {{-- end::Alert --}}

@@ -16,5 +16,4 @@ enum ActivityTypes: int
     case DELETE_PRODUCT = 5;
     case TRANSAKSI = 6;
     case LAPORAN = 7;
-    // case GAJI = 8;
 }

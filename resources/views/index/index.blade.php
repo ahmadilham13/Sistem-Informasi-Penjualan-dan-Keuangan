@@ -61,6 +61,9 @@
                 @case(App\Enums\ActivityTypes::PRODUCT)
                     <x-timeline-item-product :item="$item" />
                 @break
+                @case(App\Enums\ActivityTypes::TRANSAKSI)
+                    <x-timeline-item-transaksi :item="$item" />
+                @break
             @endswitch
 
             @php

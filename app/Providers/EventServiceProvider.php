@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Models\Modal;
 use App\Models\ProductBibit;
+use App\Models\Transaksi;
 use App\Models\User;
 use App\Observers\ModalObserver;
 use App\Observers\PetugasObserver;
 use App\Observers\ProductBibitObserver;
+use App\Observers\TransaksiObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -29,7 +31,8 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         User::class => PetugasObserver::class,
         Modal::class => ModalObserver::class,
-        ProductBibit::class => ProductBibitObserver::class
+        ProductBibit::class => ProductBibitObserver::class,
+        Transaksi::class => TransaksiObserver::class,
     ];
 
     /**

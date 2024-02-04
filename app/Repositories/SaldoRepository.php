@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\SaldoRequest;
+use App\Http\Requests\TransaksiRequest;
 use App\Http\Resources\SaldoResource;
 use App\Interfaces\SaldoInterface;
 use App\Models\Saldo;
@@ -70,6 +71,32 @@ class SaldoRepository implements SaldoInterface
             $saldo_new = DB::transaction(function () use($uang) {
                 $saldo = Saldo::query()->create([
                     'saldo' => -$uang
+                ]);
+
+                return $saldo;
+            });
+        }
+
+        return new SaldoResource($saldo_new);
+    }
+
+    public function UpdateSaldoAfterTransaction(TransaksiRequest $request): SaldoResource
+    {
+        $saldo = Saldo::query()->first();
+        
+        if($saldo) {
+            // tidak kosong
+            $saldo_new = DB::transaction(function () use ($saldo, $request) {
+
+                $saldo['saldo'] += $request->total_bayar;
+                $saldo->update();
+
+                return $saldo;
+            });
+        } else {
+            $saldo_new = DB::transaction(function () use($request) {
+                $saldo = Saldo::query()->create([
+                    'saldo' => $request->total_bayar
                 ]);
 
                 return $saldo;

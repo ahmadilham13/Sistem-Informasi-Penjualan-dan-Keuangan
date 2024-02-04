@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\Transaksi;
 
+use App\Enums\NamaProses;
+use App\Enums\TypeProses;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransaksiRequest;
 use App\Interfaces\KasirInterface;
 use App\Interfaces\ProductInterface;
+use App\Interfaces\ProsesUangInterface;
+use App\Interfaces\SaldoInterface;
 use App\Interfaces\TransaksiInterface;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TransaksiController extends BaseController
 {
-    public function __construct(TransaksiInterface $transaksi, ProductInterface $product, KasirInterface $kasir)
+    public function __construct(TransaksiInterface $transaksi, ProductInterface $product, KasirInterface $kasir, SaldoInterface $saldo, ProsesUangInterface $uang)
     {
-        parent::__construct($transaksi, $product, $kasir);
+        parent::__construct($transaksi, $product, $kasir, $saldo, $uang);
 
         $this->setSortChoices([
             'created_at-asc' => 'Oldest',
@@ -60,20 +65,33 @@ class TransaksiController extends BaseController
 
         $products = $this->product->GetAllProduct(search: $this->search);
         $kasirs = $this->kasir->GetAllKasirData();
+
+        // get total_payment
+        $total_payment = 0;
+        foreach($kasirs as $key => $value) {
+            $total_payment += $value->productBibit->harga_jual * $value->quantity;
+        }
         
         return view('transaksi.manage', [
             'products'  => $products,
             'kasirs'    => $kasirs,
-            'search'    => $this->search
+            'search'    => $this->search,
+            'total_payment' => $total_payment,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TransaksiRequest $request) 
+    public function store(TransaksiRequest $request) : RedirectResponse
     {
-        // return redirect()->route('transaksi.create')->with('status', 'saldo-added');
+        // dd($request);
+        $this->transaksi->CreateTransaksi($request);
+        $this->kasir->DeleteAllProduct();
+        $this->saldo->UpdateSaldoAfterTransaction($request);
+        $this->uang->CreateUangLog(namaProses: NamaProses::TRANSAKSI, typeProses: TypeProses::MASUK, nominal: $request->total_bayar);
+
+        return redirect()->back()->with('status', 'transaksi-added');
     }
 
     /**

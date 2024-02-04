@@ -49,6 +49,13 @@ class KasirRepository implements KasirInterface
         return $kasir->delete();
     }
 
+    public function DeleteAllProduct()
+    {
+        return Kasir::query()
+                ->where('user_id', '=', Auth::user()->id)
+                ->delete();
+    }
+
     // private method
     private function getProduct(int $product_id)
     {

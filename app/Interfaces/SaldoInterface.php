@@ -3,6 +3,7 @@
 namespace App\Interfaces;
 
 use App\Http\Requests\SaldoRequest;
+use App\Http\Requests\TransaksiRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\SaldoResource;
 use App\Http\Resources\UserResource;
@@ -14,6 +15,7 @@ interface SaldoInterface
 {
     public function GetSaldo() : SaldoResource;
     public function UpdateSaldo(SaldoRequest $request, bool $add=true) : SaldoResource;
+    public function UpdateSaldoAfterTransaction(TransaksiRequest $request) : SaldoResource;
     public function KurangSaldo(int $uang);
 }
 

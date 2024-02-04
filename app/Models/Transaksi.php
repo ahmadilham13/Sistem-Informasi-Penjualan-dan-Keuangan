@@ -12,6 +12,13 @@ class Transaksi extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'kode_transaksi',
+        'customer_name',
+        'product_bibits_id',
+        'quantity',
+        'user_id',
+    ];
     
     /**
      * Product Bibit
@@ -20,7 +27,7 @@ class Transaksi extends Model
      */
     public function productBibit() : BelongsTo
     {
-        return $this->belongsTo(ProductBibit::class);
+        return $this->belongsTo(ProductBibit::class, "product_bibits_id");
     }
 
     /**

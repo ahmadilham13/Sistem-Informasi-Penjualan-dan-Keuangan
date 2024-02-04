@@ -23,15 +23,25 @@
             <x-input-error class="mt-2" type="customer_name" />
         </div>
         <!-- end::Customer Name Input -->
+
+        {{-- input Hidden Start --}}
+        @foreach ($kasirs as $item)
+            <x-text-input type="hidden" name="product_id[]" :value="$item->productBibit->id"/>
+            <x-text-input type="hidden" name="quantity[]" :value="$item->quantity"/>
+        @endforeach
+
+        <x-text-input type="hidden" name="total_bayar" :value="$total_payment"/>
+        {{-- input Hidden End --}}
     </div>
 
-    <div class="flex justify-end gap-2 pt-8 pb-5">
-        <button
-            class="px-4 py-2 text-sm text-indigo-500 transition duration-150 rounded bg-indigo-50 hover:bg-indigo-500 hover:text-white"
-            @click="modalForm = false">
-            Save
-        </button>
-    </div>
+    @isset($kasirs[0])
+        <div class="flex justify-end gap-2 pt-8 pb-5">
+            <button
+                class="px-4 py-2 text-sm text-indigo-500 transition duration-150 rounded bg-indigo-50 hover:bg-indigo-500 hover:text-white">
+                Save
+            </button>
+        </div>
+    @endisset
 </form>
     {{-- Table Start --}}
         @isset($kasirs[0])
@@ -41,7 +51,13 @@
                         {{ __('Product') }}
                     </x-table-header>
                     <x-table-header>
+                        {{ __('Harga') }}
+                    </x-table-header>
+                    <x-table-header>
                         {{ __('Quantity') }}
+                    </x-table-header>
+                    <x-table-header>
+                        {{ __('Total') }}
                     </x-table-header>
                     <x-table-header class="text-center">
                         {{ __('Action') }}
@@ -51,7 +67,9 @@
                     @foreach ($kasirs as $item)
                         <x-table-row>
                             <x-table-data>{{ $item->productBibit->product_name }}</x-table-data>
+                            <x-table-data>Rp. {{ number_format($item->productBibit->harga_jual, 0, ',', '.') }}</x-table-data>
                             <x-table-data>{{ $item->quantity }}</x-table-data>
+                            <x-table-data>Rp. {{ number_format($item->productBibit->harga_jual * $item->quantity, 0, ',', '.') }}</x-table-data>
                             <x-table-actions>
                                 <div class="flex items-center justify-center gap-2">
                                     <form action="{{route(name: 'kasir.destroy', parameters: ['kasir' => $item->id], absolute: false)}}" method="post">
