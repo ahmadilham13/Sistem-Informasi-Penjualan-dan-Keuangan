@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoleSeeder::class,
             ProductBibitSeeder::class,
+            ActivitySeeder::class,
         ]);
     }
 }
