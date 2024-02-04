@@ -16,18 +16,24 @@
                         <div class="p-4">
                             <h2 class="text-xl font-semibold mb-2">{{ $product->product_name }}</h2>
                             <p class="text-blue-500 font-bold mt-2">Rp. {{ number_format($product->harga_jual, 0, ',', '.') }}</p>
-                            <form action="{{ route(name: 'kasir.store', absolute: false) }}" method="POST">
-                                @csrf
-                                @method('post')
-                                <div class="mb-2">
-                                    <x-text-input type="hidden" name="product_bibits_id" id="product_bibits_id" :value="$product->id"/>
-                                        <div class="flex items-center gap-2 justify-center">
-                                            <x-text-input type="number" name="quantity" id="quantity" :value="1" min="0"/>
-                                            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md">+</button>
-                                        </div>
-                                </div>
-                            </form>
-                            <!-- Tambahkan tombol atau link untuk detail produk jika diperlukan -->
+                            <span class="text-sm">Stock: {{$product->stock}}</span>
+                            @if ($product->stock == 0)
+                                <p>
+                                    <span class="text-red-600">out of stocks</span>
+                                </p>
+                            @else
+                                <form action="{{ route(name: 'kasir.store', absolute: false) }}" method="POST">
+                                    @csrf
+                                    @method('post')
+                                    <div class="mb-2">
+                                        <x-text-input type="hidden" name="product_bibits_id" id="product_bibits_id" :value="$product->id"/>
+                                            <div class="flex items-center gap-2 justify-center">
+                                                <x-text-input type="number" name="quantity" id="quantity" :value="1" min="0" max="{{$product->stock}}"/>
+                                                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md">+</button>
+                                            </div>
+                                    </div>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>

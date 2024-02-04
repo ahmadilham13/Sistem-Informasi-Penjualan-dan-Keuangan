@@ -65,7 +65,13 @@
                                 <x-table-data>{{ $item->product_id }}</x-table-data>
                                 <x-table-data>{{ $item->product_name }}</x-table-data>
                                 <x-table-data>Rp. {{ number_format($item->harga_jual, 0, ',', '.') }}</x-table-data>
-                                <x-table-data>{{ $item->stock }}</x-table-data>
+                                <x-table-data>
+                                    @if ($item->stock == 0)
+                                        <span class="text-red-500">out of stock</span>
+                                    @else
+                                        {{ $item->stock }}
+                                    @endif
+                                </x-table-data>
                                 <x-table-data>{{ $item->created_at }}</x-table-data>
                                 <x-table-actions>
                                     <div class="flex items-center justify-center gap-2">

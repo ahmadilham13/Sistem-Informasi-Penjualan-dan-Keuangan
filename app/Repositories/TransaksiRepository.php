@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Http\Requests\TransaksiRequest;
 use App\Http\Resources\TransaksiResource;
 use App\Interfaces\TransaksiInterface;
+use App\Models\ProductBibit;
 use App\Models\Transaksi;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -42,10 +43,19 @@ class TransaksiRepository implements TransaksiInterface
             $transaksi->quantity = $product_quantity[$i];
             $transaksi->user_id = Auth::user()->id;
             $transaksi->save();
+
+            $this->updateProductStock($product_id[$i], $product_quantity[$i]);
         }
 
         return new TransaksiResource($transaksi);
         
+    }
+
+    private function updateProductStock(int $product_id, int $qty)
+    {
+        $product = ProductBibit::query()->where('id', '=', $product_id)->first();
+        $product->stock -= $qty;
+        $product->update();
     }
 }
 
