@@ -1,4 +1,4 @@
-<aside :class="menuOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed inset-y-0 left-0 z-10 w-64 overflow-y-auto transition duration-300 bg-slate-500 lg:translate-x-0 lg:inset-0 custom-scrollbar">
+<aside :class="menuOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed inset-y-0 left-0 z-10 w-64 overflow-y-auto transition duration-300 bg-slate-500 lg:translate-x-0 lg:inset-0 custom-scrollbar disabling-print">
     <!-- start::Logo -->
     <div class="flex items-center justify-center h-16 bg-black bg-opacity-30">
       <h1 class="text-lg font-bold tracking-widest text-gray-100 uppercase">

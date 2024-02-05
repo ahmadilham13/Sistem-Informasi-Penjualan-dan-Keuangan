@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Interfaces\ActivityInterface;
 use App\Interfaces\GajiInterface;
 use App\Interfaces\KasirInterface;
+use App\Interfaces\LaporanInterface;
 use App\Interfaces\ModalInterface;
 use App\Interfaces\ProductInterface;
 use App\Interfaces\ProsesUangInterface;
@@ -14,6 +15,7 @@ use App\Interfaces\UserInterface;
 use App\Repositories\ActivityRepository;
 use App\Repositories\GajiRepository;
 use App\Repositories\KasirRepository;
+use App\Repositories\LaporanRepository;
 use App\Repositories\ModalRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProsesUangRepository;
@@ -35,6 +37,7 @@ class RepositoryServiceProvider extends ServiceProvider
         KasirInterface::class => KasirRepository::class,
         ActivityInterface::class => ActivityRepository::class,
         GajiInterface::class => GajiRepository::class,
+        LaporanInterface::class => LaporanRepository::class,
     ];
     /**
      * Register services.

@@ -1,4 +1,4 @@
-<div class="flex flex-col">
+<div class="flex flex-col disabling-print">
     <header class="flex items-center justify-between h-16 px-6 py-4 bg-white">
       <!-- start::Mobile menu button -->
       <div class="flex items-center">

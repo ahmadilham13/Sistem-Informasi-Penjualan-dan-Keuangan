@@ -28,7 +28,7 @@
         }
     </style>
 
-    @routes
+    {{-- @routes --}}
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])

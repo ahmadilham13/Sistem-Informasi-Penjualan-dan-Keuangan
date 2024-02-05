@@ -23,6 +23,16 @@
     z-index: -1;
 }
 
+@media print {
+
+    /* Sembunyikan navbar saat mencetak */
+    .disabling-print {
+        display: none;
+    }
+
+    /* Atur tata letak atau gaya cetak khusus lainnya di sini */
+}
+
 /* Breadcrumb Start */
 
 .breadcrumb-item+.breadcrumb-item::before {
