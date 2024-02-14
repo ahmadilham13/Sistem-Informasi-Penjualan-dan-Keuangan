@@ -70,7 +70,7 @@
                                             <x-table-data>{{ $item->productBibit->product_name }}</x-table-data>
                                             <x-table-data>{{ $item->quantity }}</x-table-data>
                                             <x-table-data>Rp. {{ number_format($item->productBibit->harga_jual * $item->quantity, 0, ',', '.') }}</x-table-data>
-                                            <x-table-data>{{ $item->created_at }}</x-table-data>
+                                            <x-table-data>{{ date_format($item->created_at,"d-M-Y") }}</x-table-data>
                                             {{-- <x-table-actions>
                                                 <div class="flex items-center justify-center gap-2">
                                                     <a href="{{ route(name: 'petugas.show', parameters: ['user' => $item->id], absolute: false) }}" class="px-4 py-2 text-xs font-medium text-indigo-500 transition duration-150 rounded bg-indigo-50 hover:bg-indigo-500 hover:text-white">

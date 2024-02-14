@@ -7,8 +7,8 @@
         </div>
         <div class="mb-4">
             <p class="text-lg font-semibold">Toko Rido Flower</p>
-            <p>Jl. Nama Jalan No. 123</p>
-            <p>Kota, Provinsi</p>
+            <p>Andaleh, Kec. Batipuah, Kab. Tanah Datar</p>
+            <p>Sumatera Barat</p>
             <!-- Tambahkan informasi perusahaan sesuai kebutuhan -->
             <hr class="border border-black"/>
         </div>

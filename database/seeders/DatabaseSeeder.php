@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             GajiSeeder::class,
             ProsesUangSeeder::class,
             SaldoSeeder::class,
+            TransaksiSeeder::class,
             ActivitySeeder::class,
         ]);
     }
