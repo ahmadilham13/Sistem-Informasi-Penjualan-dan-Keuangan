@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoleSeeder::class,
             ProductBibitSeeder::class,
+            ModalSeeder::class,
+            GajiSeeder::class,
+            ProsesUangSeeder::class,
+            SaldoSeeder::class,
             ActivitySeeder::class,
         ]);
     }

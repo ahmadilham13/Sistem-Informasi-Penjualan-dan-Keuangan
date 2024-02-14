@@ -73,7 +73,7 @@
                                         -
                                     @endif
                                 </x-table-data>
-                                <x-table-data>{{ $item->created_at }}</x-table-data>
+                                <x-table-data>{{ date_format($item->created_at,"d-M-Y") }}</x-table-data>
                                 <x-table-actions>
                                     <div class="flex items-center justify-center gap-2">
                                         <a href="{{ route(name: 'petugas.edit', parameters: ['user' => $item->id], absolute: false) }}" class="px-4 py-2 text-xs font-medium text-yellow-500 transition duration-150 rounded bg-yellow-50 hover:bg-yellow-500 hover:text-white">

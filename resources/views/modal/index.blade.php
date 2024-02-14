@@ -56,8 +56,8 @@
                                     @foreach ($data as $item)
                                         <x-table-row>
                                             <x-table-data>{{ $item->name }}</x-table-data>
-                                            <x-table-data>{{ $item->harga }}</x-table-data>
-                                            <x-table-data>{{ $item->created_at }}</x-table-data>
+                                            <x-table-data>Rp. {{ number_format($item->harga, 0, ',', '.') }}</x-table-data>
+                                            <x-table-data>{{ date_format($item->created_at,"d-M-Y") }}</x-table-data>
                                             {{-- <x-table-actions>
                                                 <div class="flex items-center justify-center gap-2">
                                                     <a href="{{ route(name: 'modal.edit', parameters: ['modal' => $item->id], absolute: false) }}" class="px-4 py-2 text-xs font-medium text-yellow-500 transition duration-150 rounded bg-yellow-50 hover:bg-yellow-500 hover:text-white">

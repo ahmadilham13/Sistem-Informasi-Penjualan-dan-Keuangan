@@ -14,7 +14,7 @@ class ProsesUangRepository implements ProsesUangInterface
 {
     public function GetProsesUang(): AnonymousResourceCollection
     {
-        $collection = proses_uang::query()->get();
+        $collection = proses_uang::query()->orderBy('created_at', 'asc')->get();
 
         return UangResource::collection($collection);
     }

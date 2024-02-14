@@ -19,9 +19,9 @@
                 @if (empty($data->saldo))
                     <p class="text-3xl font-bold text-red-500">Rp 0</p>
                 @elseif($data->saldo < 0)
-                    <p class="text-3xl font-bold text-red-500">Rp {{ $data->saldo }}</p>
+                    <p class="text-3xl font-bold text-red-500">Rp. {{ number_format($data->saldo, 0, ',', '.') }}</p>
                 @else
-                <p class="text-3xl font-bold text-green-500">Rp {{ $data->saldo }}</p>
+                <p class="text-3xl font-bold text-green-500">Rp. {{ number_format($data->saldo, 0, ',', '.') }}</p>
                 @endif
             </div>
 
@@ -35,13 +35,13 @@
                             @case(App\Enums\TypeProses::MASUK)
                                 <li class="mb-2">
                                     <span class="text-green-500">{{App\Enums\NamaProses::getDisplayName($activity->nama_proses)}}:</span>
-                                    <span class="text-gray-600">Rp {{$activity->nominal}} - {{ $activity->created_at }}</span>
+                                    <span class="text-gray-600">Rp. {{ number_format($activity->nominal, 0, ',', '.') }} - {{ $activity->created_at }}</span>
                                 </li>                                
                                 @break
                             @case(App\Enums\TypeProses::KELUAR)
                                 <li class="mb-2">
                                     <span class="text-red-500">{{App\Enums\NamaProses::getDisplayName($activity->nama_proses)}}:</span>
-                                    <span class="text-gray-600">Rp {{$activity->nominal}} - {{ $activity->created_at }}</span>
+                                    <span class="text-gray-600">Rp. {{ number_format($activity->nominal, 0, ',', '.') }} - {{ $activity->created_at }}</span>
                                 </li>
                                 @break
                             @default

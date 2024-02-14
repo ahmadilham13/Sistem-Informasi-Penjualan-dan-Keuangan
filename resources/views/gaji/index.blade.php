@@ -59,13 +59,13 @@
                                     <div class="flex items-center gap-3">
                                         <div class="relative" x-data="{ online: @js(Cache::has(config('auth.user_online') . $item->id) ? true : false) }">
                                             <img src="{{ $item->user->media->last() != null ? $item->user->media->last()->getUrl() : Vite::asset('resources/images/default-avatar.png') }}" width="42" height="42" alt="" class="rounded full">
-                                            <div class="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full" :class="{'bg-green-500': online, 'bg-gray-500': !online}"></div>
+                                            {{-- <div class="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full" :class="{'bg-green-500': online, 'bg-gray-500': !online}"></div> --}}
                                         </div>
                                     </div>
                                 </x-table-data>
                                 <x-table-data>{{ $item->user->name }}</x-table-data>
                                 <x-table-data>Rp {{ number_format($item->nominal, 0, ',', '.') }}</x-table-data>
-                                <x-table-data>{{ $item->created_at }}</x-table-data>
+                                <x-table-data>{{ date_format($item->created_at,"d-M-Y") }}</x-table-data>
                             </x-table-row>
                         @endforeach
                     </x-slot>
