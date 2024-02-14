@@ -62,6 +62,8 @@ class LaporanController extends BaseController
             'quantity'      => $quantity,
             'total'         => $total,
             'resultsTotal'  => $resultKeuntungan,
+            'tahunSelect'   => $request->query('tahun') ? $request->query('tahun') : '',
+            'bulanSelect'   => $request->query('bulan') ? $request->query('bulan') : null,
         ]);
     }
 

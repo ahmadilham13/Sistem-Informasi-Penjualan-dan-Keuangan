@@ -19,16 +19,18 @@
             @csrf
             @method('get')
             <div>
-                <x-select name="bulan" :options="$bulanOptions" placeholder="Select Bulan" />
+                <x-select name="bulan" :options="$bulanOptions" :defaultValue="$bulanSelect" placeholder="Select Bulan" />
             </div>
             <div>
-                <x-select name="tahun" :options="$tahunOptions" :defaultValue="$tahunOptions" />
+                <x-select name="tahun" :options="$tahunOptions" :defaultValue="$tahunSelect" />
             </div>
             <x-button class="mt-2 disabling-print" type="submit" color="light-primary">{{ __('Filter') }}</x-button>
         </form>
 
         @empty($data)
-            
+            <x-data-empty>
+                {{ __('Select Date') }}
+            </x-data-empty>
         @else
             <table class="w-full border-collapse border border-gray-400 mb-8">
                 <thead>
