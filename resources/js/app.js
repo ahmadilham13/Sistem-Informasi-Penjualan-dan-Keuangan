@@ -1,6 +1,11 @@
 import './bootstrap';
 import "./flatpickr";
 
+import.meta.glob([
+    "../images/**/**",
+    // '../fonts/**',
+]);
+
 import Alpine from 'alpinejs';
 import collapse from "@alpinejs/collapse";
 import * as Sentry from "@sentry/browser";
