@@ -68,13 +68,13 @@
                 <tfoot>
                     <tr>
                         <td colspan="4" class="border border-gray-400 p-2 font-semibold">Total</td>
+                        <td class="border border-gray-400 p-2 font-semibold">{{$quantity}}</td>
                         <td class="border border-gray-400 p-2 font-semibold">Rp. {{number_format($total, 0, ',', '.')}}</td>
                         @if ($resultsTotal > 0)
                             <td class="border border-gray-400 p-2 bg-green-500">Keuntungan</td>
                             @else
                             <td class="border border-gray-400 p-2 bg-red-500">Kerugian</td>
                         @endif
-                        <td class="border border-gray-400 p-2 font-semibold">Rp. {{number_format($resultsTotal, 0, ',', '.')}}</td>
                     </tr>
                 </tfoot>
             </table>
