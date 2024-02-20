@@ -32,7 +32,7 @@
                 {{ __('Select Date') }}
             </x-data-empty>
         @else
-            <table class="w-full border-collapse border border-gray-400 mb-8">
+            <table class="w-full border-collapse border border-gray-400 mb-8 text-center text-[10px]">
                 <thead>
                     <tr>
                         <th class="border border-gray-400 p-2">No</th>
@@ -67,8 +67,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3" class="border border-gray-400 p-2 font-semibold">Total</td>
-                        <td class="border border-gray-400 p-2 font-semibold">{{$quantity}}</td>
+                        <td colspan="4" class="border border-gray-400 p-2 font-semibold">Total</td>
                         <td class="border border-gray-400 p-2 font-semibold">Rp. {{number_format($total, 0, ',', '.')}}</td>
                         @if ($resultsTotal > 0)
                             <td class="border border-gray-400 p-2 bg-green-500">Keuntungan</td>
