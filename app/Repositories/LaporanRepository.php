@@ -11,13 +11,17 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class LaporanRepository implements LaporanInterface
 {
-    public function GetAllLaporan(?string $bulan = null, string $tahun): array
+    public function GetAllLaporan(string $tanggal, ?string $bulan = null, string $tahun): array
     {
 
         $query =  Transaksi::query()->whereYear('created_at', $tahun);
 
         if (!is_null($bulan)) {
             $query->whereMonth('created_at', $bulan);
+        }
+
+        if(!empty($tanggal)) {
+            $query->whereDay('created_at', '=', $tanggal);
         }
 
         $query->with(['user', 'productBibit']);
@@ -27,12 +31,16 @@ class LaporanRepository implements LaporanInterface
         return $data;
     }
 
-    public function GetTotalPengeluaran(?string $bulan=null, string $tahun)
+    public function GetTotalPengeluaran(string $tanggal, ?string $bulan=null, string $tahun)
     {
         $queryModal = Modal::query()->whereYear('created_at', $tahun);
 
         if (!is_null($bulan)) {
             $queryModal->whereMonth('created_at', $bulan);
+        }
+
+        if(!empty($tanggal)) {
+            $queryModal->whereDay('created_at', '=', $tanggal);
         }
 
         $dataQueryModal = $queryModal->get()->toArray();
@@ -47,6 +55,10 @@ class LaporanRepository implements LaporanInterface
 
         if (!is_null($bulan)) {
             $queryGaji->whereMonth('created_at', $bulan);
+        }
+
+        if(!empty($tanggal)) {
+            $queryGaji->whereDay('created_at', '=', $tanggal);
         }
 
         $dataQueryGaji = $queryGaji->get()->toArray();

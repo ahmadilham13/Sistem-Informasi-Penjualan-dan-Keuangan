@@ -95,7 +95,7 @@ Route::prefix('/')->middleware(['auth'])->controller(IndexController::class)->gr
     });
 
     Route::prefix('transaksi/')->name('transaksi.')->controller(TransaksiController::class)->group(function () {
-        Route::get('', 'index')->name('index');
+        Route::get('', 'index')->name('index')->middleware(HandlePrecognitiveRequests::class)->can('transaksi.index');
         Route::get('create', 'create')->name('create');
         Route::post('', 'store')->name('store')->middleware(HandlePrecognitiveRequests::class);
 

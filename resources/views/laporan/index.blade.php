@@ -15,17 +15,30 @@
 
         <!-- Filter untuk Bulan dan Tahun -->
         {{-- <form action="{{ route(name: 'gaji.index', absolute: false) }}" method="get" class="flex items-center gap-3"> --}}
-        <form action="{{ route(name: 'laporan.index', absolute: false) }}" method="get" class="flex items-center gap-3 mb-2">
+        <form action="{{ route(name: 'laporan.index', absolute: false) }}" method="get" class="flex items-center gap-3 mb-2 disabling-print">
             @csrf
             @method('get')
             <div>
-                <x-select name="bulan" :options="$bulanOptions" :defaultValue="$bulanSelect" placeholder="Select Bulan" />
+                <x-text-input id="tanggal" class="block mt-1 w-full" type="text" name="tanggal" :value="old('tanggal', isset($dateSelect) ? $dateSelect : '')" placeholder="Tanggal" autofocus autocomplete="tanggal" />
+            </div>
+            <div>
+                <x-select name="bulan" :options="$bulanOptions" :defaultValue="$bulanSelect" />
             </div>
             <div>
                 <x-select name="tahun" :options="$tahunOptions" :defaultValue="$tahunSelect" />
             </div>
-            <x-button class="mt-2 disabling-print" type="submit" color="light-primary">{{ __('Filter') }}</x-button>
+            <div class="gap-2">
+                <x-button class="mt-2 disabling-print" type="submit" color="light-primary">{{ __('Filter') }}</x-button>
+                @if (!empty($dateSelect) || !empty($bulanSelect) || !empty($tahunSelect))
+                    <a href="{{ route('laporan.index') }}" class="bg-green-50 text-green-500 hover:bg-green-600 hover:text-white px-4
+                    py-2 text-sm hover:shadow-xl transition duration-150 rounded-md mt-2 disabling-print">{{ __('Reset') }}</a>
+                @endif
+            </div>
         </form>
+
+        <div class="hidden m-2 enabling-print">
+            <span>Periode: {{ $periode }}</span>
+        </div>
 
         @empty($data)
             <x-data-empty>
@@ -41,8 +54,8 @@
                         <th class="border border-gray-400 p-2">Bibit</th>
                         <th class="border border-gray-400 p-2">Quantity</th>
                         <th class="border border-gray-400 p-2">Total </th>
-                        {{-- <th class="border border-gray-400 p-2">Tanggal</th> --}}
-                        <th class="border border-gray-400 p-2">Petugas</th>
+                        <th class="border border-gray-400 p-2">Tanggal</th>
+                        {{-- <th class="border border-gray-400 p-2">Petugas</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -57,8 +70,8 @@
                             <td class="border border-gray-400 p-2">{{$item['product_bibit']['product_name']}}</td>
                             <td class="border border-gray-400 p-2">{{$item['quantity']}}</td>
                             <td class="border border-gray-400 p-2">Rp. {{ number_format($item['product_bibit']['harga_jual'] * $item['quantity'], 0, ',', '.') }}</td>
-                            {{-- <td class="border border-gray-400 p-2">{{$item['created_at']}}</td> --}}
-                            <td class="border border-gray-400 p-2">{{$item['user']['name']}}</td>
+                            <td class="border border-gray-400 p-2">{{Carbon\Carbon::parse($item['created_at'])->format('d-M-Y')}}</td>
+                            {{-- <td class="border border-gray-400 p-2">{{$item['user']['name']}}</td> --}}
                         </tr>                        
                         @php
                             $no++;
@@ -78,6 +91,25 @@
                     </tr>
                 </tfoot>
             </table>
+
+            <!-- Penanggung Jawab dan Tanda Tangan -->
+            <div class="hidden letter-signature enabling-print">
+                <p>
+                    Andaleh, <?php echo date("d-M-Y") ?>,<br>
+                    <span>KEPALA PIMPINAN</span><br>
+                    <span>Rido Flower</span>
+                </p>
+                <div>
+                   <Br>
+                   <br>
+                   <br>
+                    <div class="letter-signature-dots">
+                        <div style="font-weight: bold;">
+                            <strong class="underline">Rido Risti</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Tombol Cetak -->
             <button onclick="printPage()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabling-print">

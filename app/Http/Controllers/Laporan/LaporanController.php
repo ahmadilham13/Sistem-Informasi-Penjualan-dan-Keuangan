@@ -31,6 +31,8 @@ class LaporanController extends BaseController
         $this->setPagination($request);
         $this->setSort($request);
 
+        $tanggal = $request->query('tanggal') ? $request->query('tanggal') : '';
+
         // $bulan = $this->generateBulanOptions($request->query('bulan'));
         $tahun = $this->generateTahunOptions($request->query('tahun'));
 
@@ -42,10 +44,10 @@ class LaporanController extends BaseController
         if($request->query('tahun')!=null) {
             if(empty($request->query('bulan'))) $bulan = null;
             $bulan = $request->query('bulan');
-            $data = $this->laporan->GetAllLaporan($bulan, $tahun);
+            $data = $this->laporan->GetAllLaporan($tanggal, $bulan, $tahun);
 
             // get pengeluaran
-            $totalPengeluaran = $this->laporan->GetTotalPengeluaran($bulan, $tahun);
+            $totalPengeluaran = $this->laporan->GetTotalPengeluaran($tanggal, $bulan, $tahun);
 
             foreach($data as $key => $value) {
                 $quantity += $value['quantity'];
@@ -62,8 +64,10 @@ class LaporanController extends BaseController
             'quantity'      => $quantity,
             'total'         => $total,
             'resultsTotal'  => $resultKeuntungan,
+            'dateSelect'    => $tanggal,
             'tahunSelect'   => $request->query('tahun') ? $request->query('tahun') : '',
             'bulanSelect'   => $request->query('bulan') ? $request->query('bulan') : null,
+            'periode'       => $this->formatTanggal($tanggal, $request->query('bulan') ? $request->query('bulan') : null, $request->query('tahun') ? $this->generateTahunOptions($request->query('tahun')) : ''),
         ]);
     }
 
@@ -119,7 +123,7 @@ class LaporanController extends BaseController
     // private method
     private function generateBulanOptions($key=null)
     {
-        $bulanOptions = [];
+        $bulanOptions = ['' => 'Select Month'];
 
         for ($i = 1; $i <= 12; $i++) {
             $timestamp = mktime(0, 0, 0, $i, 1);
@@ -145,5 +149,31 @@ class LaporanController extends BaseController
         } else {
             return $range;
         }
+    }
+
+    private function formatTanggal($hari = null, $bulan = null, $tahun = null) {
+        $bulanArray = [
+            'January', 'February', 'March', 'April', 'May', 'June', 
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+    
+        $result = '';
+    
+        // Cek jika ada input hari, bulan, dan tahun
+        if (!empty($hari) && !empty($bulan) && !empty($tahun)) {
+            $bulanString = $bulanArray[$bulan];
+            $result = "$hari $bulanString $tahun";
+        }
+        // Jika hanya ada input bulan dan tahun
+        elseif (!empty($bulan) && !empty($tahun)) {
+            $bulanString = $bulanArray[$bulan - 1];
+            $result = "$bulanString $tahun";
+        }
+        // Jika hanya ada input tahun
+        elseif (!empty($tahun)) {
+            $result = "$tahun";
+        }
+    
+        return $result;
     }
 }

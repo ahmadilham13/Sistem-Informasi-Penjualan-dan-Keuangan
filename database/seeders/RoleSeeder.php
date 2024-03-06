@@ -25,5 +25,11 @@ class RoleSeeder extends Seeder
             'author_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+
+        DB::table('role_users')->insert([
+            'name' => 'Pimpinan',
+            'author_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 }

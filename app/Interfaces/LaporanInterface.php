@@ -4,8 +4,8 @@ namespace App\Interfaces;
 
 interface LaporanInterface
 {
-    public function GetAllLaporan(string $bulan=null, string $tahun) : array;
-    public function GetTotalPengeluaran(string $bulan=null, string $tahun); 
+    public function GetAllLaporan(string $tanggal, string $bulan=null, string $tahun) : array;
+    public function GetTotalPengeluaran(string $tanggal, string $bulan=null, string $tahun); 
 }
 
 ?>

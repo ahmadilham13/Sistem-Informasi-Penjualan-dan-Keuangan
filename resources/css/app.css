@@ -30,7 +30,22 @@
         display: none;
     }
 
+    .enabling-print {
+        display: block;
+    }
+
     /* Atur tata letak atau gaya cetak khusus lainnya di sini */
+}
+
+.letter-signature {
+    margin-top: 40px;
+    text-align: right;
+}
+
+.letter-signature-dots {
+    height: 50px;
+    /* font-size: 20px; */
+    margin-top: 10px;
 }
 
 /* Breadcrumb Start */
